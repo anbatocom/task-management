@@ -8,12 +8,14 @@ database.connect();
 
 const Task = require("./model/task.model")
 
-app.get("/tasks", async (req, res) => {
-  const tasks = await Task.find({
+app.get("/tasks/detail/:id", async (req, res) => {
+  const id = req.params.id;
+  const task = await Task.find({
+    _id: id,
     deleted: false,
   });
 
-  res.json(tasks);
+  res.json(task);
 });
 
 app.listen(port, () => {
